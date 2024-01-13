@@ -8,6 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            background: gray;
             background-image: url('sahara_desert.jpg');
             background-size: cover;
             background-position: center;
@@ -73,6 +74,18 @@
         input[type="submit"]:hover {
             background-color: #0e3727;
         }
+
+        .confirmation-message {
+            display: none;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
@@ -100,6 +113,11 @@
         <input type="submit" value="Submit">
     </form>
 
+    <div id="thankYouMessage" class="confirmation-message">
+        <h2>Thank you for your submission!</h2>
+        <p>We appreciate your feedback. Our team will get back to you shortly.</p>
+    </div>
+
     <script>
         function submitForm(event) {
             event.preventDefault(); // Prevent the default form submission
@@ -114,12 +132,13 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        // Form submission successful, you can handle the response here
+                        // Form submission successful
                         console.log('Form submission successful');
                         console.log(xhr.responseText);
 
-                        // Optionally, you can redirect the user to a thank-you page or show a success message
-                        // window.location.href = 'thank_you.html';
+                        // Hide the form and show the thank-you message
+                        document.getElementById('myForm').style.display = 'none';
+                        document.getElementById('thankYouMessage').style.display = 'block';
                     } else {
                         // Form submission failed, handle the error here
                         console.error('Form submission failed');
